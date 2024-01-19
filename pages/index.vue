@@ -1,48 +1,17 @@
 <template>
-  <div>
-    <h3>Upload de arquivo</h3>
-    <div class="w-200px">
-      <v-file-input
-        v-model="files"
-        color="deep-purple-accent-4"
-        counter
-        label="File input"
-        multiple
-        placeholder="Select your files"
-        prepend-icon="mdi-paperclip"
-        variant="outlined"
-        :show-size="1000"
-      >
-        <template v-slot:selection="{ fileNames }">
-          <template v-for="(fileName, index) in fileNames" :key="fileName">
-            <v-chip
-              v-if="index < 2"
-              color="deep-purple-accent-4"
-              label
-              size="small"
-              class="me-2"
-            >
-              {{ fileName }}
-            </v-chip>
-    
-            <span
-              v-else-if="index === 2"
-              class="text-overline text-grey-darken-3 mx-2"
-            >
-              +{{ files.length - 2 }} File(s)
-            </span>
-          </template>
-        </template>
-      </v-file-input>
-    </div>
-    <v-btn text="salvar" @click="send"></v-btn>
-  </div>
+  <v-row>
+    <v-col cols="12" lg="2">
+      <side-bar @send-response="getData"></side-bar>
+    </v-col>
+    <v-col class="flex flex-col items-center pa-10">
+      <main-chart :data="data"></main-chart>
+    </v-col>
+  </v-row>
 </template>
 <script setup>
-const {postFile} = useFilesStore()
-const files = ref([])
+const data = ref([])
 
-const send = () => {
-  postFile(files.value)
+const getData = (items) => {
+  data.value = items
 }
 </script>

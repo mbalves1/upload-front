@@ -9,6 +9,7 @@ export default defineNuxtConfig({
         autoImportsimport: ['defineStore']
       }
     ],
+    '@nuxtjs/google-fonts'
   ],
   imports: {
     dirs: [
@@ -18,6 +19,6 @@ export default defineNuxtConfig({
     ],
   },
   build: {
-    transpile: ['chart.js'],
+    transpile: ['chart.js', 'xlsx'],
   },
 })
