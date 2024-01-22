@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col w-full border rounded-xl sm:h-90vh sm-pb-10">
-    <div class="min-h-150px sm:h-150px flex items-center justify-between bg-#41729F rounded-t-xl">
+    <div class="min-h-150px sm:h-150px flex items-center sm:justify-between bg-#41729F rounded-t-xl">
       <div class="flex items-center px-10 bg-#41729F">
         <v-icon style="font-size:40px; color:white; background:#41729F">mdi-finance</v-icon>
         <p class="text-lg sm:text-3xl font-bold ml-4 text-white bg-#41729F">Dashboard</p>
@@ -78,7 +78,7 @@
       <v-col cols="12" lg="3" class="gap-1">
         <div class="flex justify-center">
           <div class="font-bold">
-            Ativos e Chrun do ano
+            Ativos e Churn do ano
           </div>
         </div>
         <div class="sm:h-250px">
@@ -135,7 +135,7 @@ const chartDataBar = computed(() => {
   });
 
   const totalPorMes = datasFiltradas.reduce((acc, data) => {
-    const mes = data.dataInicio.split('-')[1];
+    const mes = getMes(data.dataInicio);
     const valor = parseFloat(data.valor);
 
     const item = acc.find((item) => item.mes === mes);
@@ -165,6 +165,15 @@ const chartDataBar = computed(() => {
 
 const churn = ref()
 
+function getMes(data) {
+  const date = new Date(data);
+  if (/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z/.test(data)) {
+    return data.split('-')[1];
+  } else {
+    return date.getMonth();
+  }
+}
+
 const chartDataChurnBar = computed(() => {
   const responseDate = props.data;
   const ano = Number(selectYear.value);
@@ -175,7 +184,7 @@ const chartDataChurnBar = computed(() => {
   });
 
   const totalPorMes = datasFiltradas.reduce((acc, data) => {
-    const mes = data.dataCancelamento.split('-')[1];
+    const mes = getMes(data.dataCancelamento);
     const valor = parseFloat(data.valor);
 
     const item = acc.find((item) => item.mes === mes);
@@ -268,8 +277,6 @@ const highestValue = computed(() => {
   const maxValue = Math.max(...formatNumber.map((obj) => obj.valor));
   const minValue = Math.min(...formatNumber.map((obj) => obj.valor));
   const users = formatNumber.filter((obj) => obj.valor === maxValue || obj.valor === minValue).map((obj) => obj.idAssinante);
-  // const maxNumber = Math.max(...formatNumber)
-  console.log(users)
 
   return {
     labels: users,
