@@ -16,6 +16,7 @@
             append-inner-icon="mdi-file"
             :rules="[v => !!v || 'Campo obrigatório!']"
             prepend-icon=""
+            accept=".csv,.xlsx"
            ></v-file-input>
         </div>
         <v-divider></v-divider>

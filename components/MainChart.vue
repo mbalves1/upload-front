@@ -12,7 +12,16 @@
     </div>
     <v-divider></v-divider>
     <div class="h-70px flex items-center justify-center ma-10 pa-8 bg-#f2f2f2 rounded">
-      <div class="text-5xl mr-2 font-bold">{{selectYear}}</div>
+      <div class="text-5xl mr-2 font-bold">
+        
+        <v-tooltip text="Escolha qual mês deseja visualizar clicando na engrenagem" location="start">
+          <template v-slot:activator="{ props }">
+            <v-icon v-bind="props" style="font-size:20px; color:grey;">mdi-alert-circle-outline</v-icon>
+          </template>
+        </v-tooltip>
+
+        {{selectYear}}
+      </div>
 
       <v-menu
         :close-on-content-click="false"
