@@ -23,7 +23,7 @@ Para isso, siga as instruções do README do back-end.
 https://github.com/mbalves1/uploadapi
 
 Acesse a aplicação no navegador em http://localhost:3001.
-Para isso, execute o comando npm run dev no diretório do projeto.
+Para isso, execute o comando yarn dev no diretório do projeto.
 
 
 ```bash
@@ -42,7 +42,7 @@ bun install
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Start the development server on `http://localhost:3001`:
 
 ```bash
 # npm
